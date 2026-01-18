@@ -19,10 +19,10 @@
             <img src="images/bookshelf.svg" alt="Bookshelf icon">
             <p>The Odin Library</p>
         </div>
-        <div class="button">
+        <button id="add_book_btn">
             <img src="images/plus-box.svg" alt="">
-            <p>Add Book</p>
-        </div>
+            Add Book
+        </button>
     </div>
     <div class="books_container">
         <div class="card">
@@ -33,10 +33,10 @@
                 <p class="book_pages">Pages 69</p>
             </div>
             <div class="action_buttons">
-                <div class="button">Read</div>
-                <div class="button" id="remove_button">
+                <button>Read</button>
+                <button id="remove_button">
                     <img src="images/delete.svg" alt="delete icon">
-                </div>
+                </button>
             </div>
         </div>
 
@@ -48,10 +48,10 @@
                 <p class="book_pages">Pages 69</p>
             </div>
             <div class="action_buttons">
-                <div class="button">Read</div>
-                <div class="button" id="remove_button">
+                <button>Read</button>
+                <button id="remove_button">
                     <img src="images/delete.svg" alt="delete icon">
-                </div>
+                </button>
             </div>
         </div>
 
@@ -63,15 +63,65 @@
                 <p class="book_pages">Pages 69</p>
             </div>
             <div class="action_buttons">
-                <div class="button">Read</div>
-                <div class="button" id="remove_button">
+                <button>Read</button>
+                <button id="remove_button">
                     <img src="images/delete.svg" alt="delete icon">
-                </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="book_cover"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoVDjVRUD6MTv7zgbWWyX9tSONpR2ttgXBww&s" alt="Books cover"></div>
+            <div class="book_info">
+                <h2 class="book_title">The Psychology Of Money</h2>
+                <p class="book_author">Morgan Housel</p>
+                <p class="book_pages">Pages 69</p>
+            </div>
+            <div class="action_buttons">
+                <button>Read</button>
+                <button id="remove_button">
+                    <img src="images/delete.svg" alt="delete icon">
+                </button>
             </div>
         </div>
     </div>
     <div class="footer">
         <p class="footer_text">&copy The Odin Library 2026</p>
     </div>
+
+    <!-- Add book dialog box -->
+     <dialog class="add_book_dialog">
+        <form method="dialog" id="add_book_form">
+            <h2>Add book</h2>
+
+            <label>
+                <span>Title:</span>
+                <input type="text" id="book_title_input" required>
+            </label>
+            <label>
+                <span>Author:</span>
+                <input type="text" id="book_author_input" required>
+            </label>
+            <label>
+                <span>Number of page:</span>
+                <input type="number" id="book_page_number_input" required>
+            </label>
+            <label>
+                <span>Book Cover URL:</span>
+                <input type="text" id="book_cover_url" required>
+            </label>
+            <label id="reading_status_label">
+                Did you read this? 
+                <select name="reading_status" id="reading_status" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </label>
+            <div class="action_buttons">
+                <button id="confirm_btn" value="default">Confirm</button>
+                <button id="cancel_btn" value="cancel" formnovalidate>Cancel</button>
+            </div>
+        </form>
+     </dialog>
 </body>
 </html>

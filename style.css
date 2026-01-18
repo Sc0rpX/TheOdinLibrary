@@ -35,12 +35,13 @@ body {
     width: 80px;
 }
 
-.button {
+button {
     background-color: #4F46E5;
     font-size: 18px;
     font-weight: bold;
 
     padding: 8px 16px;
+    border: none;
     border-radius: 8px;
 
     display: flex;
@@ -48,18 +49,20 @@ body {
     gap: 8px;
 }
 
-.button:hover {
+button:hover {
     background-color: #6366F1;
+    cursor: pointer;
 }
 
-.button:focus {
-    border: 3px solid #FACC15;
+button:focus {
+    border: 1px solid #FACC15;
 }
 
-.button > img {
+button > img {
     width: 32px;
 }
 
+/* Main content: books container */
 .books_container {
     background-color: #0B1220;
     padding: 60px;
@@ -119,6 +122,7 @@ body {
 
 #remove_button {
     background-color: transparent;
+    border: none;
     padding: 8px;
 }
 
@@ -131,4 +135,78 @@ body {
     background-color: #1E293B;
     padding: 12px 0;
     text-align: center;
+}
+
+/* Add Book Dialog */
+.add_book_dialog {
+    background-color: #1e293b;
+    color: #f8fafc;
+    padding: 60px 48px;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.add_book_dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.add_book_dialog h2 {
+    margin-bottom: 28px;
+    font-size: 40px;
+    border-bottom: 2px solid #6366f1;
+    padding-bottom: 5px;
+}
+
+#add_book_form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+#add_book_form > label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #cbd5e1;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#add_book_form #reading_status_label {
+    flex-direction: row;
+    gap: 16px;
+}
+
+#add_book_form input, #reading_status {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 18px;
+}
+
+#add_book_form input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+#add_book_form .action_buttons{
+    display: flex;
+    justify-content: end;
+}
+
+#confirm_btn, #cancel_btn {
+    padding: 16px 32px;
 }
