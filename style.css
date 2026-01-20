@@ -138,7 +138,7 @@ button > img {
 }
 
 /* Add Book Dialog */
-.add_book_dialog {
+#add_book_dialog {
     background-color: #1e293b;
     color: #f8fafc;
     padding: 60px 48px;
@@ -154,12 +154,12 @@ button > img {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
-.add_book_dialog::backdrop {
+#add_book_dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2px);
 }
 
-.add_book_dialog h2 {
+#add_book_dialog h2 {
     margin-bottom: 28px;
     font-size: 40px;
     border-bottom: 2px solid #6366f1;
