@@ -106,5 +106,6 @@ const addBookDialog = document.getElementById("add_book_dialog");
 
 addBookBtn.addEventListener("click", () => {
     addBookDialog.showModal();
+    document.getElementById("add_book_form").reset();
 })
 
