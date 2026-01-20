@@ -1,17 +1,21 @@
 const myLibrary = [];
 
-function Book(id, title, author, pages, readingStat, bookCoverUrl) {
+function Book(id, title, author, pages, readStatus, bookCoverUrl) {
     this.id = id;
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.readingStat = readingStat;
+    this.readStatus = readStatus;
     this.bookCoverUrl = bookCoverUrl;
 }
 
-function addBookToLibrary(title, author, pages, readingStat, bookCoverUrl) {
+Book.prototype.toggleReadStatus = function() {
+    this.readStatus = this.readStatus === true ? false : true;
+}
+
+function addBookToLibrary(title, author, pages, readStatus, bookCoverUrl) {
     const id = crypto.randomUUID();
-    const newBook = new Book(id, title, author, pages, readingStat, bookCoverUrl);
+    const newBook = new Book(id, title, author, pages, readStatus, bookCoverUrl);
 
     myLibrary.push(newBook);
 }
@@ -55,10 +59,22 @@ function displayBooks() {
         const actionButtons = document.createElement("div");
         actionButtons.classList.add("action_buttons");
 
-        const readingStatBtn = document.createElement("button");
-        readingStatBtn.id = "reading_status_btn";
-        readingStatBtn.textContent = book.readingStat === true ? "Read" : "Not Read";
-        actionButtons.appendChild(readingStatBtn);
+        const readStatusBtn = document.createElement("button");
+        readStatusBtn.className = book.readStatus === true ? "read_status" : "not_read_status";
+        readStatusBtn.textContent = book.readStatus === true ? "Read" : "Not Read";
+
+        // Read status changing feature
+        readStatusBtn.addEventListener("click", (event) => {
+            const parentCard = event.currentTarget.closest(".card");
+            const bookId = parentCard.dataset.id;
+            const bookIndex = myLibrary.findIndex(book => book.id === bookId)
+
+            myLibrary[bookIndex].toggleReadStatus();
+            event.currentTarget.textContent = myLibrary[bookIndex].readStatus === true ? "Read" : "Not Read";
+            event.currentTarget.className = myLibrary[bookIndex].readStatus === true ? "read_status" : "not_read_status";
+        })
+
+        actionButtons.appendChild(readStatusBtn);
 
         const removeBtn = document.createElement("button");
         removeBtn.classList.add("remove_button");
@@ -72,7 +88,6 @@ function displayBooks() {
         // Remove button event to remove a book
         removeBtn.addEventListener("click", (event) => {
             const parentCard = event.target.closest(".card");
-            console.log(parentCard.dataset.id);
             const bookId = parentCard.dataset.id;
         
             parentCard.remove();
@@ -103,12 +118,12 @@ confirmBtn.addEventListener("click", () => {
     const bookTitle = document.getElementById("book_title_input").value;
     const bookAuthor = document.getElementById("book_author_input").value;
     const bookPages = document.getElementById("book_page_number_input").value;
-    const readingStat = document.getElementById("reading_status").value === "yes" ? true : false;
+    const readStatus = document.getElementById("read_status").value === "yes" ? true : false;
     const bookCoverUrl = document.getElementById("book_cover_url").value;
 
-    console.log(`${bookTitle}, ${bookAuthor}, ${bookPages}, ${readingStat}, ${bookCoverUrl}`)
+    console.log(`${bookTitle}, ${bookAuthor}, ${bookPages}, ${readStatus}, ${bookCoverUrl}`)
 
-    addBookToLibrary(bookTitle, bookAuthor, bookPages, readingStat, bookCoverUrl);
+    addBookToLibrary(bookTitle, bookAuthor, bookPages, readStatus, bookCoverUrl);
     booksContainer.replaceChildren();
     displayBooks();
 })

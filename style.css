@@ -120,6 +120,44 @@ button > img {
     gap: 18px;
 }
 
+.read_status {
+    background-color: #22C55E;
+    color: #0B1220;
+    border: 2px solid #16A34A;
+}
+
+.read_status::before {
+    content: '✔'
+}
+
+.read_status:hover {
+    background-color: #16A34A;
+    color: #FFFFFF;
+    border: 2px solid #15803D;
+}
+
+.read_status:focus {
+    border: none;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.45);
+}
+
+.not_read_status {
+    background-color: transparent;
+    color: #CBD5E1;
+    border: 1px solid #334155;
+}
+
+.not_read_status:hover {
+    background-color: transparent;
+    color: #FACC15;
+    border: 1px solid #FACC15;
+}
+
+.not_read_status:focus{
+    border: none;
+    box-shadow: 0 0 0 3px rgba(203, 213, 225, 0.45);
+}
+
 .remove_button {
     background-color: transparent;
     border: none;
