@@ -120,13 +120,13 @@ button > img {
     gap: 18px;
 }
 
-#remove_button {
+.remove_button {
     background-color: transparent;
     border: none;
     padding: 8px;
 }
 
-#remove_button:hover {
+.remove_button:hover {
     background-color: rgba(239, 68, 68, 0.15);
 }
 

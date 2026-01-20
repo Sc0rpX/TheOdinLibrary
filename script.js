@@ -22,6 +22,7 @@ function displayBooks() {
     for (book of myLibrary){
         const card = document.createElement("div");
         card.classList.add("card");
+        card.dataset.id = book.id;
 
         const bookCover = document.createElement("div");
         bookCover.classList.add("book_cover");
@@ -60,13 +61,26 @@ function displayBooks() {
         actionButtons.appendChild(readingStatBtn);
 
         const removeBtn = document.createElement("button");
-        removeBtn.id = "remove_button";
+        removeBtn.classList.add("remove_button");
 
         const deleteIcon = document.createElement("img");
         deleteIcon.src = "images/delete.svg";
         deleteIcon.alt = "delete icon";
 
         removeBtn.appendChild(deleteIcon);
+
+        // Remove button event to remove a book
+        removeBtn.addEventListener("click", (event) => {
+            const parentCard = event.target.closest(".card");
+            console.log(parentCard.dataset.id);
+            const bookId = parentCard.dataset.id;
+        
+            parentCard.remove();
+
+            const indexOfBook = myLibrary.findIndex(book => book.id === bookId);
+            myLibrary.splice(indexOfBook, 1);
+        })
+
         actionButtons.appendChild(removeBtn);
 
         card.appendChild(actionButtons);
