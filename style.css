@@ -224,7 +224,7 @@ button > img {
     gap: 16px;
 }
 
-#add_book_form input, #reading_status {
+#add_book_form input, #read_status {
     background-color: #0f172a;
     border: 1px solid #334155;
     color: white;
