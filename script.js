@@ -1,24 +1,28 @@
 const myLibrary = [];
 
-function Book(id, title, author, pages, readStatus, bookCoverUrl) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-    this.bookCoverUrl = bookCoverUrl;
+class Book{
+    constructor(id, title, author, pages, readStatus, bookCoverUrl) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;
+        this.bookCoverUrl = bookCoverUrl;
+    }
+
+    static toggleReadStatus(book) {
+        book.readStatus = book.readStatus === true ? false : true;
+    }
+
+    static addBookToLibrary(title, author, pages, readStatus, bookCoverUrl) {
+        const id = crypto.randomUUID();
+        const newBook = new Book(id, title, author, pages, readStatus, bookCoverUrl);
+    
+        myLibrary.push(newBook);
+    }
 }
 
-Book.prototype.toggleReadStatus = function() {
-    this.readStatus = this.readStatus === true ? false : true;
-}
 
-function addBookToLibrary(title, author, pages, readStatus, bookCoverUrl) {
-    const id = crypto.randomUUID();
-    const newBook = new Book(id, title, author, pages, readStatus, bookCoverUrl);
-
-    myLibrary.push(newBook);
-}
 
 const booksContainer = document.querySelector(".books_container");
 
@@ -69,7 +73,7 @@ function displayBooks() {
             const bookId = parentCard.dataset.id;
             const bookIndex = myLibrary.findIndex(book => book.id === bookId)
 
-            myLibrary[bookIndex].toggleReadStatus();
+            Book.toggleReadStatus(myLibrary[bookIndex]);
             event.currentTarget.textContent = myLibrary[bookIndex].readStatus === true ? "Read" : "Not Read";
             event.currentTarget.className = myLibrary[bookIndex].readStatus === true ? "read_status" : "not_read_status";
         })
@@ -104,9 +108,9 @@ function displayBooks() {
 }
 
 // Demo Books
-addBookToLibrary("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 443, true, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF0Rg-K61ZSq6x6jtg8v91Jy006W3GZIaU-6WHqD_K-Nf4NOjxCIJ3UHtpcSlZimG8kDYjkw&s");
-addBookToLibrary("Educated", "Tara Westover", 334, true, "https://0.academia-photos.com/attachment_thumbnails/66592589/mini_magick20210423-6227-cnlv42.png?1619184394");
-addBookToLibrary("The Immortal Life of Henrietta Lacks", "Rebecca Skloot", 370, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfo0OIiIJhsig3HIP_weCFMXnrFijkJ4rFJIxWEqzR5aAw7PaSQDB41n_h8s-F-VV4VdhY&s");
+Book.addBookToLibrary("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 443, true, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF0Rg-K61ZSq6x6jtg8v91Jy006W3GZIaU-6WHqD_K-Nf4NOjxCIJ3UHtpcSlZimG8kDYjkw&s");
+Book.addBookToLibrary("Educated", "Tara Westover", 334, true, "https://0.academia-photos.com/attachment_thumbnails/66592589/mini_magick20210423-6227-cnlv42.png?1619184394");
+Book.addBookToLibrary("The Immortal Life of Henrietta Lacks", "Rebecca Skloot", 370, false, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfo0OIiIJhsig3HIP_weCFMXnrFijkJ4rFJIxWEqzR5aAw7PaSQDB41n_h8s-F-VV4VdhY&s");
 
 displayBooks();
 
@@ -121,9 +125,7 @@ confirmBtn.addEventListener("click", () => {
     const readStatus = document.getElementById("read_status").value === "yes" ? true : false;
     const bookCoverUrl = document.getElementById("book_cover_url").value;
 
-    console.log(`${bookTitle}, ${bookAuthor}, ${bookPages}, ${readStatus}, ${bookCoverUrl}`)
-
-    addBookToLibrary(bookTitle, bookAuthor, bookPages, readStatus, bookCoverUrl);
+    Book.addBookToLibrary(bookTitle, bookAuthor, bookPages, readStatus, bookCoverUrl);
     booksContainer.replaceChildren();
     displayBooks();
 })
