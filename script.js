@@ -119,6 +119,41 @@ displayBooks();
 const addBookDialog = document.getElementById("add_book_dialog");
 const addBookForm = document.getElementById("add_book_form");
 
+// form validation
+const inputFields = addBookForm.querySelectorAll("input");
+
+inputFields.forEach(input => {
+    input.addEventListener("invalid", () => {
+        if (input.validity.valueMissing) {
+            switch (input.id) {
+                case "book_title_input":
+                    input.setCustomValidity("The book title must be filled!");
+                    break;
+    
+                case "book_author_input":
+                    input.setCustomValidity("The author name must be filled!");
+                    break;
+    
+                case "book_page_number_input":
+                    input.setCustomValidity("Please enter the number of pages!");
+                    break;
+    
+                case "book_cover_url":
+                    input.setCustomValidity("We need a URL for the book cover!");
+                    break;
+            
+                default:
+                    input.setCustomValidity("This field is required!")
+                    break;
+            }
+        }
+        
+        input.addEventListener("input", () => {
+            input.setCustomValidity("");
+        })
+    })
+});
+
 addBookForm.addEventListener("submit", (e) => {
     const bookTitle = document.getElementById("book_title_input").value;
     const bookAuthor = document.getElementById("book_author_input").value;
@@ -130,17 +165,16 @@ addBookForm.addEventListener("submit", (e) => {
     booksContainer.replaceChildren();
     displayBooks();
 
-    const cancelBtn = document.getElementById("cancel_btn");
-    cancelBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        addBookDialog.close();
-    })
 })
 
+const cancelBtn = document.getElementById("cancel_btn");
+cancelBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    addBookDialog.close();
+})
 
 // Show Add Book dialog
 const addBookBtn = document.getElementById("add_book_btn");
-
 addBookBtn.addEventListener("click", () => {
     addBookDialog.showModal();
     document.getElementById("add_book_form").reset();
