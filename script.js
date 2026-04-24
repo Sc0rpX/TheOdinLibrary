@@ -116,9 +116,10 @@ displayBooks();
 
 
 // Take user input
-const confirmBtn = document.getElementById("confirm_btn");
+const addBookDialog = document.getElementById("add_book_dialog");
+const addBookForm = document.getElementById("add_book_form");
 
-confirmBtn.addEventListener("click", () => {
+addBookForm.addEventListener("submit", (e) => {
     const bookTitle = document.getElementById("book_title_input").value;
     const bookAuthor = document.getElementById("book_author_input").value;
     const bookPages = document.getElementById("book_page_number_input").value;
@@ -128,12 +129,17 @@ confirmBtn.addEventListener("click", () => {
     Book.addBookToLibrary(bookTitle, bookAuthor, bookPages, readStatus, bookCoverUrl);
     booksContainer.replaceChildren();
     displayBooks();
+
+    const cancelBtn = document.getElementById("cancel_btn");
+    cancelBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        addBookDialog.close();
+    })
 })
 
 
 // Show Add Book dialog
 const addBookBtn = document.getElementById("add_book_btn");
-const addBookDialog = document.getElementById("add_book_dialog");
 
 addBookBtn.addEventListener("click", () => {
     addBookDialog.showModal();
